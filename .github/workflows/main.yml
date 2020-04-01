@@ -28,4 +28,4 @@ jobs:
 
       - name: Copy files to S3 with the AWS CLI
         run: |
-          aws s3 sync ./out s3://veetour-poc
+          aws s3 sync ./out s3://veetour-poc --delete --acl public-read
