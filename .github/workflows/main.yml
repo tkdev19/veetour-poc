@@ -19,7 +19,6 @@ jobs:
       - run: yarn --prod
       - run: yarn build:static
       - run: gzip -9 -r ./out
-      - run: gunzip -r ./out
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
