@@ -19,6 +19,7 @@ jobs:
       - run: yarn --prod
       - run: yarn build:static
       - run: gzip -9 -r ./out
+      - run: find . -name "*.gz" -exec bash -c 'mv "$1" "${1%.gz}"' - '{}' \;
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -29,4 +30,4 @@ jobs:
 
       - name: Copy files to S3 with the AWS CLI
         run: |
-          aws s3 sync ./out s3://veetour-poc --delete --acl public-read
+          aws s3 sync ./out s3://veetour-poc --content-encoding gzip --acl public-read 
